@@ -1,0 +1,28 @@
+.page-header
+  = link_to new_<%= singular_table_name %>_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New <%= human_name %>
+  %h1 Listing <%= plural_table_name %>
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover.datatable
+    %thead
+      %tr
+<% for attribute in attributes -%>
+        %th.text-center <%= attribute.human_name %>
+<% end -%>
+        %th.text-center Actions
+
+    %tbody
+      - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+        %tr
+<% for attribute in attributes -%>
+          %td.text-center= <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+          %td.text-center 
+            = link_to <%= singular_table_name %>, class: 'btn btn-default' do 
+              %span.glyphicon.glyphicon-search
+            = link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-default' do
+              %span.glyphicon.glyphicon-pencil 
+            = link_to <%= singular_table_name %>, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-default' do
+              %span.glyphicon.glyphicon-trash 
